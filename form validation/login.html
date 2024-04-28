@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes Tracker Sign up Form</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      display: flex;
+      align-items: center;
+      padding: 40px;
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .image-container {
+      flex: 1;
+      padding-right: 40px;
+    }
+
+    .image-container img {
+       max-width: 160%; 
+      height: auto;
+      border-radius: 5px;
+    }
+    .signup{
+      background-color: #FFF4FF;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+    h1 {
+      color: #E1AD01;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #FFD700;
+      border-radius: 4px;
+      box-sizing: border-box;
+      background-color: #FFFDD0;
+      color: #FFD700;
+    }
+    button {
+      background-color: #FFD700;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #FFDB58;
+    }
+    .error {
+      color: #FF0000;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+          <img src="login1.png" alt= "My Image">
+        </div>
+  <div class="signup">
+    <h1>Sign Up</h1>
+    <form id="signupForm">
+      <input type="text" id="username" placeholder="Username" required>
+      <div id="usernameError" class="error"></div>
+      <input type="email" id="email" placeholder="Email" required>
+      <div id="emailError" class="error"></div>
+      <input type="password" id="password" placeholder="Password" required>
+      <div id="passwordError" class="error"></div>
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+  <script>
+    const form = document.getElementById('signupForm');
+    const username = document.getElementById('username');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const usernameError = document.getElementById('usernameError');
+    const emailError = document.getElementById('emailError');
+    const passwordError = document.getElementById('passwordError');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let isValid = true;
+      if (username.value.trim() === '') {
+        usernameError.textContent = 'Username is required';
+        isValid = false;
+      } else {
+        usernameError.textContent = '';
+      }
+
+      if (email.value.trim() === '') {
+        emailError.textContent = 'Email is required';
+        isValid = false;
+      } else if (!isValidEmail(email.value)) {
+        emailError.textContent = 'Invalid email format';
+        isValid = false;
+      } else {
+        emailError.textContent = '';
+      }
+      if (password.value.trim() === '') {
+        passwordError.textContent = 'Password is required';
+        isValid = false;
+      } else if (password.value.length < 6) {
+        passwordError.textContent = 'Password must be at least 6 characters long';
+        isValid = false;
+      } else {
+        passwordError.textContent = '';
+      }
+      if (isValid) {
+        console.log('Form submitted successfully!');
+        form.reset();
+      }
+    });
+
+    function isValidEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+  </script>
+</body>
+</html>
